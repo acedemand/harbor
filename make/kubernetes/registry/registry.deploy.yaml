@@ -23,6 +23,20 @@ spec:
           mountPath: /etc/registry
         - name: storage
           mountPath: /storage
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 5000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
       volumes:
       - name: config
         configMap:
@@ -33,5 +47,6 @@ spec:
           - key: cert
             path: root.crt
       - name: storage
-        persistentVolumeClaim:
-          claimName: registry-pvc
+        gcePersistentDisk:
+          pdName: harbor-registry-data
+          fsType: ext4

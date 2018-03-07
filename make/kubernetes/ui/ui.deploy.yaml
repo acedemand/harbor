@@ -15,30 +15,46 @@ spec:
       - name: ui-app
         image: vmware/harbor-ui:v1.2.0
         imagePullPolicy: IfNotPresent
+
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 10
+
+
         env:
           - name: CONFIG_PATH
-            valueFrom: 
-              configMapKeyRef: 
+            valueFrom:
+              configMapKeyRef:
                name: harbor-ui-config
                key: CONFIG_PATH
           - name: LOG_LEVEL
-            valueFrom: 
-              configMapKeyRef: 
+            valueFrom:
+              configMapKeyRef:
                name: harbor-ui-config
                key: LOG_LEVEL
           - name: UI_SECRET
-            valueFrom: 
-              configMapKeyRef: 
+            valueFrom:
+              configMapKeyRef:
                name: harbor-ui-config
                key: UI_SECRET
           - name: JOBSERVICE_SECRET
-            valueFrom: 
-              configMapKeyRef: 
+            valueFrom:
+              configMapKeyRef:
                name: harbor-ui-config
                key: JOBSERVICE_SECRET
           - name: GODEBUG
-            valueFrom: 
-              configMapKeyRef: 
+            valueFrom:
+              configMapKeyRef:
                name: harbor-ui-config
                key: GODEBUG
         ports:

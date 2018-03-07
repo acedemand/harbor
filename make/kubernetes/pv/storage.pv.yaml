@@ -6,9 +6,10 @@ metadata:
     type: storage
 spec:
   capacity:
-    storage: 5Gi
+    storage: 10Gi
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  hostPath:
-    path: /data/storage
+  gcePersistentDisk:
+    pdName: harbor-storage-data
+    fsType: ext4

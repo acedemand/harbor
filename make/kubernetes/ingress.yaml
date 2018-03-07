@@ -1,0 +1,25 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: harbor
+spec:
+  tls:
+#  - hosts:
+#    - harbor.pamir.com
+  -   secretName: harbor-tls
+  rules:
+  #- host: harbor.pamir.com
+  - http:
+      paths:
+      - path: /*
+          backend:
+          serviceName: ui
+          servicePort: 80
+      - path: /v2/*
+        backend:
+          serviceName: registry
+          servicePort: 5000
+      - path: /service/*
+        backend:
+          serviceName: ui
+          servicePort: 80

@@ -3,6 +3,7 @@ kind: Service
 metadata:
   name: registry
 spec:
+  type: NodePort
   ports:
     - name: repo
       port: 5000
