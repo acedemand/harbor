@@ -27,7 +27,7 @@ data:
     auth:
       token:
         issuer: harbor-token-issuer
-        realm: http://reg.mydomain.com/service/token
+        realm: http://ui/service/token
         rootcertbundle: /etc/registry/root.crt
         service: harbor-registry
     notifications:
